@@ -9,24 +9,24 @@
 
 void selection_sort(int *array, size_t size)
 {
-	size_t i, sorts, case_best;
+	size_t i, step, case_best;
 	int tempory;
 
-	for (sorts = 0; sorts < size - 1; sorts++)
+	for (step = 0; step < size - 1; step++)
 	{
-		case_best = sorts;
+		case_best = step;
 
-		for (i = sorts + 1; i < size; i++)
+		for (i = step + 1; i < size; i++)
 		{
 			if (array[i] < array[case_best])
 				case_best = i;
 		}
 
-		if (case_best != sorts)
+		if (case_best != step)
 		{
-			tempory = array[sorts];
-			array[sorts] = array[case_best];
-			array[case_best] = array[tempory];
+			tempory = array[step];
+			array[step] = array[case_best];
+			array[case_best] = tempory;
 			print_array(array, size);
 		}
 	}
