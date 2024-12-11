@@ -1,14 +1,13 @@
 #include "sort.h"
 
 /**
- * lomuto_partions - implement the Lomuto partition scheme
- * @size: number of array
- * @array: the array
- * @start: start of index
- * @end:  end of index
- * Return: the index
+ * lomuto_partition - Implements the Lomuto partition scheme
+ * @array: The array to be partitioned
+ * @start: Start index of the partition
+ * @end: End index of the partition
+ * @size: Total size of the array (for printing purposes)
+ * Return: The index of the pivot
  */
-
 int lomuto_partition(int *array, int start, int end, int size)
 {
 	int key = array[end];
@@ -16,10 +15,11 @@ int lomuto_partition(int *array, int start, int end, int size)
 	int i, tmp;
 
 	for (i = start; i < end; i++)
+
 	{
 		if (array[i] <= key)
 		{
-			if (key_index !=i)
+			if (key_index != i)
 			{
 				tmp = array[key_index];
 				array[key_index] = array[i];
@@ -41,34 +41,37 @@ int lomuto_partition(int *array, int start, int end, int size)
 	return (key_index);
 }
 
+void quicksort_algorithm(int *array, int start, int end, int size);
+
 /**
- * quicksortalgorithm - Quick sort algorithm, with 1 notation per line
- * @size: number of array
- * @array: the array
- * @start: start of index
- * @end:  end of index
- * Return: nothing
+ * quicksort_algorithm - Recursively sorts the array using Quick Sort
+ * @array: The array to be sorted
+ * @start: Start index of the current partition
+ * @end: End index of the current partition
+ * @size: Total size of the array (for printing purposes)
+ * Return: Nothing
  */
-void quicksortalgotrithm(int *array, int start, int end, int size)
+void quicksort_algorithm(int *array, int start, int end, int size)
 {
 	if (start < end)
 	{
-		size_t key = lomuto_partition(array, start, end, size)
+		int key = lomuto_partition(array, start, end, size);
 
-			quick_Sort(array, start, key - 1, size);
-		quick_Sort(array, key + 1, end, size);
+		quicksort_algorithm(array, start, key - 1, size);
+		quicksort_algorithm(array, key + 1, end, size);
 	}
 }
 
 /**
- * quick_sort - the quick sort algorithm
- * @array: The array 
- * @size: Number of array
+ * quick_sort - Sorts an array of integers in ascending order using Quick Sort
+ * @array: The array to be sorted
+ * @size: Number of elements in the array
+ * Return: Nothing
  */
 void quick_sort(int *array, size_t size)
 {
 	if (!array || size < 2)
 		return;
 
-	quick_Sort(array, 0, size - 1, size);
+	quicksort_algorithm(array, 0, size - 1, size);
 }
